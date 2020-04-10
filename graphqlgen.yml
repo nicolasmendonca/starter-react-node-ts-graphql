@@ -1,0 +1,7 @@
+language: typescript
+schema: ./src/typeDefs/index.ts
+context: ./src/context.ts:Context
+output: ./generated/resolvers/graphqlgen.ts
+models:
+  files:
+    - ./generated/prisma-client/index.ts

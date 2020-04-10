@@ -1,0 +1,10 @@
+type Restaurant {
+  id: Int!
+  name: String!
+  image: String
+}
+
+type Query {
+  restaurant(id: Int!): Restaurant!
+  restaurants: [Restaurant!]!
+}
