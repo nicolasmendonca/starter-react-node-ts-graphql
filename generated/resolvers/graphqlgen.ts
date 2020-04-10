@@ -18,7 +18,7 @@ export namespace RestaurantResolvers {
         args: {},
         ctx: Context,
         info: GraphQLResolveInfo
-      ) => number | Promise<number>)
+      ) => string | Promise<string>)
     | {
         fragment: string;
         resolve: (
@@ -26,7 +26,7 @@ export namespace RestaurantResolvers {
           args: {},
           ctx: Context,
           info: GraphQLResolveInfo
-        ) => number | Promise<number>;
+        ) => string | Promise<string>;
       };
 
   export type NameResolver =
@@ -70,7 +70,7 @@ export namespace RestaurantResolvers {
           args: {},
           ctx: Context,
           info: GraphQLResolveInfo
-        ) => number | Promise<number>)
+        ) => string | Promise<string>)
       | {
           fragment: string;
           resolve: (
@@ -78,7 +78,7 @@ export namespace RestaurantResolvers {
             args: {},
             ctx: Context,
             info: GraphQLResolveInfo
-          ) => number | Promise<number>;
+          ) => string | Promise<string>;
         };
 
     name:
@@ -195,9 +195,55 @@ export namespace QueryResolvers {
   }
 }
 
+export namespace MutationResolvers {
+  export const defaultResolvers = {};
+
+  export interface ArgsCreateRestaurant {
+    name: string;
+    image?: string | null;
+  }
+
+  export type CreateRestaurantResolver =
+    | ((
+        parent: undefined,
+        args: ArgsCreateRestaurant,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Restaurant | null | Promise<Restaurant | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsCreateRestaurant,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Restaurant | null | Promise<Restaurant | null>;
+      };
+
+  export interface Type {
+    createRestaurant:
+      | ((
+          parent: undefined,
+          args: ArgsCreateRestaurant,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Restaurant | null | Promise<Restaurant | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsCreateRestaurant,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Restaurant | null | Promise<Restaurant | null>;
+        };
+  }
+}
+
 export interface Resolvers {
   Restaurant: RestaurantResolvers.Type;
   Query: QueryResolvers.Type;
+  Mutation: MutationResolvers.Type;
 }
 
 // @ts-ignore
