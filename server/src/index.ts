@@ -1,4 +1,3 @@
-import { prisma } from '../generated/prisma-client'
 import { GraphQLServer } from 'graphql-yoga'
 import { default as typeDefs } from "./typeDefs";
 import { default as resolvers } from "./resolvers";
@@ -14,6 +13,6 @@ const server = new GraphQLServer({
 
 server
   .start(options, () => {
-    console.log(`Server running on localhost:${options.port}`);
+    console.log(`Server running on http://localhost:${options.port}`);
   })
   .catch(err => console.error("connection Error", err));

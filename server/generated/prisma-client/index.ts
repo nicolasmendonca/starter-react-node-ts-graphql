@@ -111,9 +111,21 @@ export type RestaurantOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type RestaurantWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface RestaurantCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  image?: Maybe<String>;
+}
+
+export interface RestaurantUpdateInput {
+  name?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface RestaurantUpdateManyMutationInput {
+  name?: Maybe<String>;
+  image?: Maybe<String>;
+}
 
 export interface RestaurantWhereInput {
   id?: Maybe<ID_Input>;
@@ -163,22 +175,6 @@ export interface RestaurantWhereInput {
   NOT?: Maybe<RestaurantWhereInput[] | RestaurantWhereInput>;
 }
 
-export interface RestaurantCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  image?: Maybe<String>;
-}
-
-export interface RestaurantUpdateInput {
-  name?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface RestaurantUpdateManyMutationInput {
-  name?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
 export interface RestaurantSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -196,8 +192,110 @@ export interface RestaurantSubscriptionWhereInput {
   >;
 }
 
+export type RestaurantWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface AggregateRestaurant {
+  count: Int;
+}
+
+export interface AggregateRestaurantPromise
+  extends Promise<AggregateRestaurant>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateRestaurantSubscription
+  extends Promise<AsyncIterator<AggregateRestaurant>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface RestaurantPreviousValues {
+  id: ID_Output;
+  name: String;
+  image?: String;
+}
+
+export interface RestaurantPreviousValuesPromise
+  extends Promise<RestaurantPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  image: () => Promise<String>;
+}
+
+export interface RestaurantPreviousValuesSubscription
+  extends Promise<AsyncIterator<RestaurantPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
+}
+
+export interface RestaurantEdge {
+  node: Restaurant;
+  cursor: String;
+}
+
+export interface RestaurantEdgePromise
+  extends Promise<RestaurantEdge>,
+    Fragmentable {
+  node: <T = RestaurantPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface RestaurantEdgeSubscription
+  extends Promise<AsyncIterator<RestaurantEdge>>,
+    Fragmentable {
+  node: <T = RestaurantSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface RestaurantSubscriptionPayload {
+  mutation: MutationType;
+  node: Restaurant;
+  updatedFields: String[];
+  previousValues: RestaurantPreviousValues;
+}
+
+export interface RestaurantSubscriptionPayloadPromise
+  extends Promise<RestaurantSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = RestaurantPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = RestaurantPreviousValuesPromise>() => T;
+}
+
+export interface RestaurantSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<RestaurantSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = RestaurantSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = RestaurantPreviousValuesSubscription>() => T;
 }
 
 export interface Restaurant {
@@ -272,114 +370,18 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface RestaurantEdge {
-  node: Restaurant;
-  cursor: String;
-}
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
-export interface RestaurantEdgePromise
-  extends Promise<RestaurantEdge>,
-    Fragmentable {
-  node: <T = RestaurantPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface RestaurantEdgeSubscription
-  extends Promise<AsyncIterator<RestaurantEdge>>,
-    Fragmentable {
-  node: <T = RestaurantSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateRestaurant {
-  count: Int;
-}
-
-export interface AggregateRestaurantPromise
-  extends Promise<AggregateRestaurant>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateRestaurantSubscription
-  extends Promise<AsyncIterator<AggregateRestaurant>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface RestaurantSubscriptionPayload {
-  mutation: MutationType;
-  node: Restaurant;
-  updatedFields: String[];
-  previousValues: RestaurantPreviousValues;
-}
-
-export interface RestaurantSubscriptionPayloadPromise
-  extends Promise<RestaurantSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = RestaurantPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = RestaurantPreviousValuesPromise>() => T;
-}
-
-export interface RestaurantSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<RestaurantSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = RestaurantSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = RestaurantPreviousValuesSubscription>() => T;
-}
-
-export interface RestaurantPreviousValues {
-  id: ID_Output;
-  name: String;
-  image?: String;
-}
-
-export interface RestaurantPreviousValuesPromise
-  extends Promise<RestaurantPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  image: () => Promise<String>;
-}
-
-export interface RestaurantPreviousValuesSubscription
-  extends Promise<AsyncIterator<RestaurantPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  image: () => Promise<AsyncIterator<String>>;
-}
+export type Long = string;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
@@ -390,8 +392,6 @@ export type Int = number;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
-
-export type Long = string;
 
 /**
  * Model Metadata
@@ -411,6 +411,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466`
+  endpoint: `http://prisma:4466`
 });
 export const prisma = new Prisma();
