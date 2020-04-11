@@ -16,7 +16,6 @@
     "graphql": "^15.0.0"
   },
   "devDependencies": {
-    "graphqlgen": "^0.6.0-rc9",
     "typescript": "^3.8.3"
   }
 }
